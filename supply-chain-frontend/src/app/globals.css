@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 7%; /* Dark background */
+  --foreground: 0 0% 98%; /* Light text */
+  --card: 0 0% 9%; /* Slightly lighter dark */
+  --card-foreground: 0 0% 98%;
+  --primary: 39 100% 50%; /* Orange accent */
+  --primary-foreground: 0 0% 7%;
+  --secondary: 0 0% 12%; /* Card backgrounds */
+  --secondary-foreground: 0 0% 70%;
+  --muted: 0 0% 12%;
+  --muted-foreground: 0 0% 60%;
+  --accent: 39 100% 50%; /* Orange */
+  --accent-foreground: 0 0% 7%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 142 71% 45%;
+  --warning: 43 96% 56%;
+  --border: 0 0% 20%;
+  --input: 0 0% 15%;
+  --ring: 39 100% 50%;
+}
+
+* {
+  border-color: hsl(var(--border));
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  line-height: 1.5;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--secondary));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--accent));
+}
+
+/* Status badge styles */
+.status-delivered {
+  @apply bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.status-pending {
+  @apply bg-orange-500/20 text-orange-400 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.status-out-of-stock {
+  @apply bg-red-500/20 text-red-400 px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.status-completed {
+  @apply bg-green-500/20 text-green-400 px-2 py-1 rounded text-sm;
+}
+
+.status-in-progress {
+  @apply bg-orange-500/20 text-orange-400 px-2 py-1 rounded text-sm;
+}
+
+/* Animation for notifications */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

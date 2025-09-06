@@ -1,0 +1,107 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:7.0
+    container_name: supply-chain-mongodb
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: supply_chain_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+      - ./scripts/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+    networks:
+      - supply-chain-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: supply-chain-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - supply-chain-network
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./supply-chain-command-center-backend
+      dockerfile: Dockerfile
+    container_name: supply-chain-backend
+    restart: unless-stopped
+    environment:
+      MONGODB_URL: mongodb://admin:password@mongodb:27017/supply_chain_db?authSource=admin
+      REDIS_URL: redis://redis:6379
+      API_V1_STR: /api/v1
+      PROJECT_NAME: Supply Chain Command Center
+      SECRET_KEY: your-secret-key-change-in-production
+      PYTHONPATH: /app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - ./supply-chain-command-center-backend:/app
+      - backend_uploads:/app/uploads
+    networks:
+      - supply-chain-network
+
+  # Next.js Frontend
+  frontend:
+    build:
+      context: ./supply-chain-frontend
+      dockerfile: Dockerfile
+    container_name: supply-chain-frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:8000/api/v1
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - supply-chain-network
+
+  # Ollama for AI Models (Optional)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: supply-chain-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - supply-chain-network
+    # Uncomment if you have GPU support
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
+  backend_uploads:
+    driver: local
+  ollama_data:
+    driver: local
+
+networks:
+  supply-chain-network:
+    driver: bridge
