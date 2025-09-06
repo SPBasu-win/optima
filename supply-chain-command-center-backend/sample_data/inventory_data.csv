@@ -1,0 +1,26 @@
+product_name,current_stock,unit_price,sales_last_month,supplier,category
+Laptop Dell Inspiron,25,899.99,45,Dell Inc,Electronics
+Wireless Mouse Logitech,150,24.99,120,Logitech,Accessories
+Office Chair Ergonomic,8,249.99,12,Office Supplies Co,Furniture
+Mechanical Keyboard,45,89.99,67,Razer,Accessories
+Monitor 24 inch,12,199.99,28,Samsung,Electronics
+USB Cable Type-C,200,9.99,180,Generic Supplier,Accessories
+Desk Lamp LED,35,39.99,25,Philips,Lighting
+Notebook A4 Pack,90,12.99,85,Paper Co,Stationery
+Printer Ink Cartridge,65,34.99,58,HP,Electronics
+Webcam HD 1080p,18,79.99,22,Logitech,Electronics
+Gaming Headset,28,119.99,31,SteelSeries,Accessories
+Portable Hard Drive 1TB,15,89.99,19,Seagate,Electronics
+Power Bank 10000mAh,42,29.99,38,Anker,Electronics
+Bluetooth Speaker,22,59.99,26,JBL,Electronics
+Tablet Stand Adjustable,33,19.99,29,Generic Supplier,Accessories
+Screen Cleaner Kit,75,8.99,68,3M,Cleaning
+HDMI Cable 6ft,55,14.99,48,AmazonBasics,Accessories
+Surge Protector,20,24.99,18,Belkin,Electronics
+Wireless Charger,38,34.99,35,Samsung,Electronics
+Conference Phone,5,299.99,3,Polycom,Electronics
+Whiteboard Markers Set,88,6.99,82,Expo,Stationery
+Ethernet Cable Cat6,95,11.99,87,Monoprice,Accessories
+Document Scanner,7,149.99,9,Canon,Electronics
+Laptop Cooling Pad,26,24.99,23,Cooler Master,Accessories
+Smart Watch Fitness,11,199.99,14,Fitbit,Electronics
